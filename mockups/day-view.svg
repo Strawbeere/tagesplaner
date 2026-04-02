@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="430" height="932" viewBox="0 0 430 932" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Phone background -->
+  <rect width="430" height="932" rx="50" fill="#0B1929"/>
+
+  <!-- Dynamic Island -->
+  <rect x="151" y="14" width="128" height="34" rx="17" fill="#060D18"/>
+
+  <!-- Status bar -->
+  <text x="34" y="37" fill="#F0F4FF" font-size="14" font-family="system-ui,-apple-system,sans-serif" font-weight="600">9:41</text>
+  <path d="M348 33 Q353 27 358 33" stroke="#F0F4FF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M344 37 Q353 22 362 37" stroke="#F0F4FF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="353" cy="39" r="2" fill="#F0F4FF"/>
+  <rect x="370" y="26" width="26" height="13" rx="3" stroke="#F0F4FF" stroke-width="1.5" fill="none"/>
+  <rect x="396" y="29.5" width="3" height="6" rx="1.5" fill="#F0F4FF" fill-opacity="0.5"/>
+  <rect x="371.5" y="27.5" width="20" height="10" rx="2" fill="#F0F4FF"/>
+
+  <!-- 3-Punkte-Menü -->
+  <circle cx="393" cy="75" r="2.5" fill="#4A6080"/>
+  <circle cx="401" cy="75" r="2.5" fill="#4A6080"/>
+  <circle cx="409" cy="75" r="2.5" fill="#4A6080"/>
+
+  <!-- Header -->
+  <text x="28" y="82" fill="#8899B0" font-size="15" font-family="system-ui,-apple-system,sans-serif">Mittwoch, 1. April 2026</text>
+  <text x="28" y="124" fill="#F0F4FF" font-size="38" font-family="system-ui,-apple-system,sans-serif" font-weight="700">Heute</text>
+  <circle cx="372" cy="102" r="22" fill="#2966D8"/>
+  <line x1="372" y1="92" x2="372" y2="112" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="362" y1="102" x2="382" y2="102" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Progress -->
+  <text x="28" y="152" fill="#8899B0" font-size="13" font-family="system-ui,-apple-system,sans-serif">4 von 7 erledigt</text>
+  <text x="402" y="152" fill="#2966D8" font-size="13" font-family="system-ui,-apple-system,sans-serif" text-anchor="end" font-weight="600">57 %</text>
+  <rect x="28" y="160" width="374" height="5" rx="2.5" fill="#1B3156"/>
+  <rect x="28" y="160" width="213" height="5" rx="2.5" fill="#2966D8"/>
+
+  <!-- Timeline line -->
+  <line x1="62" y1="185" x2="62" y2="660" stroke="#1B3156" stroke-width="1.5"/>
+
+  <!-- TASK 1: Morgenroutine – erledigt (grün ✓) -->
+  <text x="55" y="222" fill="#465970" font-size="11" font-family="system-ui,-apple-system,sans-serif" text-anchor="end">07:00</text>
+  <circle cx="62" cy="218" r="5" fill="#22C55E"/>
+  <rect x="78" y="200" width="328" height="74" rx="16" fill="#0D1F14"/>
+  <rect x="78" y="200" width="4" height="74" rx="2" fill="#22C55E"/>
+  <text x="98" y="226" fill="#F0F4FF" font-size="15" font-family="system-ui,-apple-system,sans-serif" font-weight="600">Morgenroutine</text>
+  <text x="98" y="249" fill="#8899B0" font-size="12" font-family="system-ui,-apple-system,sans-serif">Wasser · Dehnen · Planung</text>
+  <circle cx="381" cy="237" r="15" fill="#22C55E"/>
+  <path d="M374 237L379.5 242.5L389 230" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- TASK 2: Uni Projekt – teilweise erledigt (amber, halber Kreis) -->
+  <text x="55" y="313" fill="#465970" font-size="11" font-family="system-ui,-apple-system,sans-serif" text-anchor="end">09:00</text>
+  <circle cx="62" cy="309" r="5" fill="#F59E0B"/>
+  <rect x="78" y="283" width="328" height="90" rx="16" fill="#1A1200"/>
+  <rect x="78" y="283" width="328" height="90" rx="16" stroke="#F59E0B" stroke-width="1" stroke-opacity="0.4"/>
+  <rect x="78" y="283" width="4" height="90" rx="2" fill="#F59E0B"/>
+  <text x="98" y="309" fill="#F0F4FF" font-size="15" font-family="system-ui,-apple-system,sans-serif" font-weight="600">Uni Projekt</text>
+  <text x="98" y="331" fill="#8899B0" font-size="12" font-family="system-ui,-apple-system,sans-serif">Präsentation vorbereiten</text>
+  <rect x="98" y="342" width="106" height="18" rx="9" fill="#1B3156"/>
+  <text x="151" y="355" fill="#6BA3F5" font-size="10.5" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">09:00 – 11:00 Uhr</text>
+  <!-- Teilweise-Checkbox: rechte Hälfte gefüllt (amber) -->
+  <circle cx="381" cy="328" r="15" fill="#1A1200" stroke="#F59E0B" stroke-width="1.5"/>
+  <path d="M381 313 A15 15 0 0 1 396 328 A15 15 0 0 1 381 343 Z" fill="#F59E0B"/>
+
+  <!-- TASK 3: Mittagspause – erledigt (grün ✓) -->
+  <text x="55" y="412" fill="#465970" font-size="11" font-family="system-ui,-apple-system,sans-serif" text-anchor="end">12:30</text>
+  <circle cx="62" cy="408" r="5" fill="#22C55E"/>
+  <rect x="78" y="390" width="328" height="74" rx="16" fill="#0D1F14"/>
+  <rect x="78" y="390" width="4" height="74" rx="2" fill="#22C55E"/>
+  <text x="98" y="416" fill="#F0F4FF" font-size="15" font-family="system-ui,-apple-system,sans-serif" font-weight="600">Mittagspause</text>
+  <text x="98" y="438" fill="#8899B0" font-size="12" font-family="system-ui,-apple-system,sans-serif">Kurz rausgehen und essen</text>
+  <circle cx="381" cy="427" r="15" fill="#22C55E"/>
+  <path d="M374 427L379.5 432.5L389 420" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- TASK 4: Training – erledigt + wiederkehrend (grün ✓) -->
+  <text x="55" y="505" fill="#465970" font-size="11" font-family="system-ui,-apple-system,sans-serif" text-anchor="end">18:00</text>
+  <circle cx="62" cy="501" r="5" fill="#22C55E"/>
+  <rect x="78" y="475" width="328" height="90" rx="16" fill="#0D1F14"/>
+  <rect x="78" y="475" width="4" height="90" rx="2" fill="#22C55E"/>
+  <text x="98" y="501" fill="#F0F4FF" font-size="15" font-family="system-ui,-apple-system,sans-serif" font-weight="600">Training</text>
+  <text x="98" y="523" fill="#8899B0" font-size="12" font-family="system-ui,-apple-system,sans-serif">Ganzkörper · 45 Minuten</text>
+  <rect x="98" y="533" width="120" height="18" rx="9" fill="#1B3156"/>
+  <text x="158" y="546" fill="#6BA3F5" font-size="10" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">↻  Jeden Mittwoch</text>
+  <circle cx="381" cy="520" r="15" fill="#22C55E"/>
+  <path d="M374 520L379.5 525.5L389 513" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- TASK 5: Tagesrückblick – verschoben (violett →) -->
+  <text x="55" y="598" fill="#6B52A8" font-size="11" font-family="system-ui,-apple-system,sans-serif" text-anchor="end">20:00</text>
+  <circle cx="62" cy="594" r="5" fill="none" stroke="#8B5CF6" stroke-width="1.5"/>
+  <rect x="78" y="568" width="328" height="84" rx="16" fill="#0E0B1A"/>
+  <rect x="78" y="568" width="328" height="84" rx="16" stroke="#8B5CF6" stroke-width="1" stroke-opacity="0.3"/>
+  <rect x="78" y="568" width="4" height="84" rx="2" fill="#8B5CF6"/>
+  <text x="98" y="594" fill="#C4B0F0" font-size="15" font-family="system-ui,-apple-system,sans-serif" font-weight="600">Tagesrückblick</text>
+  <text x="98" y="614" fill="#7B6CAA" font-size="12" font-family="system-ui,-apple-system,sans-serif">Reflexion und Notizen</text>
+  <rect x="98" y="624" width="90" height="16" rx="8" fill="#2A1F45"/>
+  <text x="143" y="636" fill="#A78BFA" font-size="10" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">↷  Verschoben</text>
+  <!-- Verschoben-Checkbox: violetter Pfeil-Kreis -->
+  <circle cx="381" cy="610" r="15" fill="#0E0B1A" stroke="#8B5CF6" stroke-width="1.5"/>
+  <path d="M373 610 L386 610 M381 605 L386 610 L381 615" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Scroll fade + hint -->
+  <defs>
+    <linearGradient id="fadeDown1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B1929" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0B1929" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="655" width="430" height="100" fill="url(#fadeDown1)"/>
+  <text x="215" y="776" fill="#364d62" font-size="12" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">Notiz · Stimmung · Motivation  ↓</text>
+
+  <!-- Statuslegende -->
+  <rect x="28" y="800" width="374" height="44" rx="12" fill="#0E1A2B"/>
+  <circle cx="54" cy="822" r="6" fill="#22C55E"/>
+  <text x="66" y="826" fill="#8899B0" font-size="10.5" font-family="system-ui,-apple-system,sans-serif">Erledigt</text>
+  <circle cx="130" cy="822" r="5" fill="#F59E0B" fill-opacity="0.5" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="142" y="826" fill="#8899B0" font-size="10.5" font-family="system-ui,-apple-system,sans-serif">Teilweise</text>
+  <circle cx="219" cy="822" r="5" fill="#0E0B1A" stroke="#8B5CF6" stroke-width="1.5"/>
+  <text x="231" y="826" fill="#8899B0" font-size="10.5" font-family="system-ui,-apple-system,sans-serif">Verschoben</text>
+  <circle cx="318" cy="822" r="6" fill="#EF4444"/>
+  <path d="M314 818L322 826M322 818L314 826" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="330" y="826" fill="#8899B0" font-size="10.5" font-family="system-ui,-apple-system,sans-serif">Offen</text>
+
+  <!-- ═══ BOTTOM NAV – 5 Items ═══ -->
+  <rect x="0" y="856" width="430" height="76" fill="#070E1B"/>
+  <line x1="0" y1="856" x2="430" y2="856" stroke="#1B3156" stroke-width="1"/>
+  <rect x="160" y="914" width="110" height="4" rx="2" fill="#1B3156"/>
+
+  <!-- Monat (x=43) inaktiv – 3×2 Raster -->
+  <rect x="32" y="866" width="22" height="20" rx="3" stroke="#4A6080" stroke-width="1.5" fill="none"/>
+  <line x1="37" y1="863" x2="37" y2="869" stroke="#4A6080" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="49" y1="863" x2="49" y2="869" stroke="#4A6080" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="32" y1="872" x2="54" y2="872" stroke="#4A6080" stroke-width="0.8"/>
+  <circle cx="37" cy="877" r="1.4" fill="#4A6080"/><circle cx="43" cy="877" r="1.4" fill="#4A6080"/><circle cx="49" cy="877" r="1.4" fill="#4A6080"/>
+  <circle cx="37" cy="882" r="1.4" fill="#4A6080"/><circle cx="43" cy="882" r="1.4" fill="#4A6080"/><circle cx="49" cy="882" r="1.4" fill="#4A6080"/>
+  <text x="43" y="898" fill="#4A6080" font-size="9.5" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">Monat</text>
+
+  <!-- Woche (x=129) inaktiv – 7 Balken -->
+  <rect x="112" y="876" width="3.5" height="9" rx="1.5" fill="#4A6080"/>
+  <rect x="117" y="872" width="3.5" height="13" rx="1.5" fill="#4A6080"/>
+  <rect x="122" y="874" width="3.5" height="11" rx="1.5" fill="#4A6080"/>
+  <rect x="127" y="869" width="3.5" height="16" rx="1.5" fill="#4A6080"/>
+  <rect x="132" y="873" width="3.5" height="12" rx="1.5" fill="#4A6080"/>
+  <rect x="137" y="876" width="3.5" height="9" rx="1.5" fill="#4A6080"/>
+  <rect x="142" y="878" width="3.5" height="7" rx="1.5" fill="#4A6080"/>
+  <text x="129" y="898" fill="#4A6080" font-size="9.5" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">Woche</text>
+
+  <!-- Tag (x=215) AKTIV -->
+  <rect x="196" y="858" width="38" height="34" rx="20" fill="#2966D8" fill-opacity="0.2"/>
+  <rect x="203" y="865" width="24" height="22" rx="4" stroke="#2966D8" stroke-width="1.5" fill="none"/>
+  <line x1="209" y1="862" x2="209" y2="867" stroke="#2966D8" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="221" y1="862" x2="221" y2="867" stroke="#2966D8" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="203" y1="872" x2="227" y2="872" stroke="#2966D8" stroke-width="1"/>
+  <rect x="208" y="875" width="10" height="9" rx="2.5" fill="#2966D8"/>
+  <text x="215" y="898" fill="#2966D8" font-size="9.5" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700">Tag</text>
+
+  <!-- Ziele (x=301) inaktiv – Flagge -->
+  <line x1="291" y1="864" x2="291" y2="887" stroke="#4A6080" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M291 864 L304 869 L291 874 Z" fill="#4A6080"/>
+  <text x="301" y="898" fill="#4A6080" font-size="9.5" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">Ziele</text>
+
+  <!-- Statistiken (x=387) inaktiv – 4 aufsteigende Balken -->
+  <rect x="376" y="880" width="4" height="6" rx="1.5" fill="#4A6080"/>
+  <rect x="382" y="875" width="4" height="11" rx="1.5" fill="#4A6080"/>
+  <rect x="388" y="877" width="4" height="9" rx="1.5" fill="#4A6080"/>
+  <rect x="394" y="872" width="4" height="14" rx="1.5" fill="#4A6080"/>
+  <text x="387" y="898" fill="#4A6080" font-size="9.5" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif">Statistik</text>
+
+</svg>
