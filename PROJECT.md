@@ -41,10 +41,12 @@ Beispiel:
 ### 4.1 Tagesplanung
 
 - Aufgaben und Termine eintragen
-- Uhrzeit oder Zeitblock festlegen
-- fuer jede Aufgabe einen Status festlegen: erledigt, teilweise erledigt, verschoben oder nicht erledigt
+- Uhrzeit oder Zeitblock festlegen (z. B. 08:00 bis 09:30 Lernen)
+- fuer jede Aufgabe einen Status festlegen: geplant, erledigt, teilweise erledigt, verschoben, nicht erledigt oder fremdverschoben
 - Eintraege bearbeiten oder loeschen
 - nicht erledigte Aufgaben verschieben
+- Schnelleintrag / Quick-Add: ueber einen "+" Button (Floating Action Button) koennen Aufgaben direkt in der Tagesansicht schnell hinzugefuegt werden, ohne eine extra Seite oeffnen zu muessen
+- Drag & Drop: Aufgaben koennen per Gedruechthalten auf einen anderen Tag oder Zeitslot gezogen werden, besonders nuetzlich beim Verschieben
 
 ### 4.2 Wiederkehrende Aufgaben
 
@@ -64,16 +66,71 @@ Unterstuetzung fuer:
 - Monatsnotizen
 - Jahresnotizen
 - freie Gedanken, Eindruecke, Erkenntnisse
+- taegliche Selbsteinschaetzung:
+  - Motivation (1–10): 1 = unmotiviert, 10 = sehr motiviert
+  - Gefuehlslage (1–10): 1 = schlecht, 10 = gut
 
-### 4.4 Statistiken und Diagramme
+### 4.4 Kategorien
+
+Jede Aufgabe kann einer Kategorie zugeordnet werden. Die App liefert folgende Beispielkategorien mit:
+
+- Arbeit
+- Schule / Studium
+- Haushalt
+- Gesundheit / Sport
+- Ernaehrung
+- Finanzen
+- Soziales (Familie, Freunde, Termine mit anderen)
+- Hobbys / Freizeit
+- Selbstentwicklung (Lesen, Lernen, Weiterbildung)
+- Administratives (Behoerdengaenge, Papierkram, Versicherungen)
+
+Der Nutzer kann jederzeit eigene Kategorien hinzufuegen, bestehende umbenennen oder loeschen.
+
+### 4.5 Statistiken und Diagramme
+
+Diagramme:
+
+- Balkendiagramm: erledigt vs. teilweise erledigt vs. nicht erledigt pro Tag/Woche — zeigt auf einen Blick, wie die Aufgaben verteilt sind
+- Fortschrittsring (Donut): Tages-Erfuellungsquote — z. B. "7 von 10 erledigt", motivierend und sofort erfassbar
+- Liniendiagramm: Erfuellungsquote ueber Zeit (Wochen/Monate) — zeigt langfristige Entwicklung und ob man sich verbessert
+
+Kennzahlen:
 
 - geplante Aufgaben pro Zeitraum
 - erledigte Aufgaben pro Zeitraum
-- Erfuellungsquote
+- Erfuellungsquote (gesamt und pro Kategorie)
 - Entwicklung ueber Tage, Wochen und Monate
 - Auswertung wiederkehrender Aufgaben
+- Kategorie-Auswertung: Erfuellungsquote je Kategorie, um zu sehen, in welchen Lebensbereichen man produktiv ist und wo nicht
 
-### 4.5 Ergaenzende Uebersichten
+### 4.6 Tagesvorschau am Abend
+
+Abends zeigt die App automatisch eine Vorschau auf den naechsten Tag: z. B. "Morgen hast du 5 Aufgaben geplant". Der Nutzer kann direkt noch Anpassungen vornehmen. Das macht die App zur taeglichen Gewohnheit.
+
+### 4.7 Streak-Anzeige
+
+Die App zeigt an, seit wie vielen Tagen der Nutzer in Folge aktiv geplant hat, z. B. "Du planst seit 14 Tagen in Folge". Einfache Gamification, die motiviert dranzubleiben.
+
+### 4.8 Onboarding
+
+Beim ersten Start zeigt die App eine kurze Einfuehrung (3–4 Screens), die erklaert, wie die App funktioniert: Aufgaben anlegen, Statuswerte verstehen, Tagesabschluss nutzen. So werden Nutzer nicht von den vielen Funktionen ueberwaeltigt.
+
+### 4.9 Dark Mode
+
+Die App bietet einen dunklen Modus an, besonders angenehm abends beim Tagesabschluss. Das blau-weisse Design laesst sich gut in Dunkelblau/Grau umwandeln.
+
+### 4.10 Push-Benachrichtigungen
+
+- Erinnerungen an anstehende Aufgaben
+- Abends Erinnerung an den Tagesabschluss (Motivation und Gefuehlslage eintragen)
+- optional und vom Nutzer konfigurierbar
+
+### 4.11 Offline-First
+
+Die App muss vollstaendig ohne Internetverbindung funktionieren. Alle Daten werden lokal gespeichert. Spaeter kann optional eine Cloud-Synchronisation ergaenzt werden.
+
+### 4.12 Ergaenzende Uebersichten
 
 - Wochenansicht
 - Monatsansicht
@@ -103,13 +160,14 @@ Das macht die Tagesplanung realistischer und uebersichtlicher.
 
 Sinnvolle Statuswerte waeren:
 
-- geplant
-- erledigt
-- teilweise erledigt
-- verschoben
-- ausgefallen
+- geplant: Aufgabe steht an, noch offen (Statistik: neutral)
+- erledigt: Aufgabe abgeschlossen (Statistik: positiv)
+- teilweise erledigt: angefangen, aber nicht komplett fertig (Statistik: teilweise positiv)
+- verschoben: selbst auf einen anderen Tag verlegt (Statistik: neutral)
+- nicht erledigt: nicht geschafft, eigene Verantwortung (Statistik: negativ)
+- fremdverschoben: nicht geschafft, weil aeussere Umstaende dazwischenkamen, z. B. ungeplante Pflichten oder Notfaelle (Statistik: neutral)
 
-So bildet die App den echten Alltag besser ab.
+Der Status "fremdverschoben" sorgt dafuer, dass Situationen, in denen der Nutzer nichts dafuer konnte, die Statistik nicht negativ beeinflussen. So bildet die App den echten Alltag realistischer und fairer ab.
 
 ### 6.3 Zeitbloecke unterstuetzen
 
@@ -170,53 +228,52 @@ Ein einfacher zusaetzlicher Wert pro Tag, z. B. Stimmung oder Energie, koennte s
 
 ## 7. Seiten- und Funktionsstruktur
 
-### 7.1 Dashboard / Startseite
+### Navigation (Bottom-Bar)
 
-- kurzer Ueberblick ueber heute
-- offene Aufgaben
-- Fortschritt des Tages
-- eventuell kleine Wochenstatistik
+Von links nach rechts: Monat | Woche | **Tag** (Mitte, Fokus) | Statistik | Tagesnotiz
 
-### 7.2 Tagesansicht
+Oben rechts: Hamburger-Menue (drei Striche) mit Profil, Einstellungen und Hilfe
 
-- wichtigste Seite der App
+### 7.1 Tagesansicht (Hauptseite)
+
+- wichtigste Seite der App, zentraler Tab in der Navigation
 - Uhrzeiten links
 - Eintraege in der Mitte
 - Status oder Checkbox rechts
-- Tagesnotiz unten oder seitlich
+- Floating Action Button (+) fuer Schnelleintrag
+- Drag & Drop zum Verschieben von Aufgaben
 
-### 7.3 Wochenansicht
+### 7.2 Wochenansicht
 
 - Ueberblick ueber mehrere Tage
 - wiederkehrende Aufgaben sichtbar
 - Wochennotiz oder Wochenziel
 
-### 7.4 Monatsansicht
+### 7.3 Monatsansicht
 
 - kalenderartige Darstellung
 - zeigt aktive und produktive Tage
 - hilft beim Erkennen von Mustern
 
-### 7.5 Jahresansicht
+### 7.4 Statistik-Seite
 
-- grober Langzeitueberblick
-- Entwicklung ueber Monate
-- Jahresnotiz oder Jahresrueckblick
-
-### 7.6 Statistik-Seite
-
-- Diagramme
-- Erfuellungsquote
+- Diagramme (Balken, Donut, Linie)
+- Erfuellungsquote gesamt und pro Kategorie
 - Entwicklung nach Zeitraum
-- ggf. Auswertung nach Kategorien
+- Streak-Anzeige
+- Auswertung nach Kategorien
 
-### 7.7 Einstellungen
+### 7.5 Tagesnotiz
 
-- Kategorien verwalten
-- Farben und Design
-- Erinnerungen
-- Wiederholungsregeln
-- Sprache und allgemeine Optionen
+- Tagesnotizen, Wochennotizen, Monatsnotizen, Jahresnotizen
+- taegliche Selbsteinschaetzung (Motivation und Gefuehlslage)
+- freie Gedanken, Eindruecke, Erkenntnisse
+
+### 7.6 Profil, Einstellungen und Hilfe (Hamburger-Menue)
+
+- Profil: Nutzerdaten und Streak-Uebersicht
+- Einstellungen: Kategorien verwalten, Dark Mode, Benachrichtigungen, Farben und Design, Sprache
+- Hilfe: Onboarding erneut anzeigen, FAQ, Kontakt
 
 ## 8. Datenmodell auf hoher Ebene
 
