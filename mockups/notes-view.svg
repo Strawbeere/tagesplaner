@@ -1,0 +1,33 @@
+<svg width="430" height="932" viewBox="0 0 430 932" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="430" height="932" rx="42" fill="#EFE4D8"/>
+  <rect x="18" y="18" width="394" height="896" rx="34" fill="#FFF9EF"/>
+  <circle cx="335" cy="126" r="112" fill="#D8E8F3" fill-opacity="0.5"/>
+  <circle cx="105" cy="804" r="106" fill="#DDEBCB" fill-opacity="0.45"/>
+
+  <text x="48" y="88" fill="#22362B" font-size="18" font-family="Verdana">Rueckblick</text>
+  <text x="48" y="124" fill="#182A20" font-size="34" font-weight="700" font-family="Verdana">Notizen</text>
+
+  <rect x="48" y="154" width="334" height="86" rx="28" fill="#22362B"/>
+  <text x="72" y="188" fill="#FFF9EF" font-size="18" font-family="Verdana">Heute, Woche, Monat, Jahr</text>
+  <text x="72" y="218" fill="#D8E7C7" font-size="15" font-family="Verdana">Ein Ort fuer Gedanken, Erkenntnisse und Rueckblicke</text>
+
+  <text x="48" y="282" fill="#22362B" font-size="22" font-weight="700" font-family="Verdana">Tagesnotiz</text>
+  <rect x="48" y="304" width="334" height="196" rx="30" fill="#F6F0E6"/>
+  <text x="72" y="344" fill="#22362B" font-size="17" font-family="Verdana">Was lief heute gut?</text>
+  <text x="72" y="378" fill="#6C6F69" font-size="15" font-family="Verdana">Morgenroutine eingehalten, Training geschafft,</text>
+  <text x="72" y="402" fill="#6C6F69" font-size="15" font-family="Verdana">am Projektblock solide gearbeitet.</text>
+  <text x="72" y="444" fill="#22362B" font-size="17" font-family="Verdana">Was will ich morgen besser machen?</text>
+  <text x="72" y="478" fill="#6C6F69" font-size="15" font-family="Verdana">Weniger Ablenkung am Vormittag und klarere</text>
+  <text x="72" y="502" fill="#6C6F69" font-size="15" font-family="Verdana">Pausen zwischen den Arbeitsbloecken.</text>
+
+  <text x="48" y="548" fill="#22362B" font-size="22" font-weight="700" font-family="Verdana">Wochenreflexion</text>
+  <rect x="48" y="570" width="334" height="132" rx="30" fill="#D8E8F3"/>
+  <text x="72" y="612" fill="#23465A" font-size="18" font-weight="700" font-family="Verdana">Muster erkannt</text>
+  <text x="72" y="642" fill="#4F6E80" font-size="15" font-family="Verdana">Produktivste Tage waren Dienstag und Mittwoch.</text>
+  <text x="72" y="666" fill="#4F6E80" font-size="15" font-family="Verdana">Ungeplante Unterbrechungen kamen meist nachmittags.</text>
+
+  <text x="48" y="750" fill="#22362B" font-size="22" font-weight="700" font-family="Verdana">Monatlicher Eindruck</text>
+  <rect x="48" y="772" width="334" height="100" rx="30" fill="#F5D9B8"/>
+  <text x="72" y="814" fill="#6B3D26" font-size="18" font-weight="700" font-family="Verdana">April startet stabil</text>
+  <text x="72" y="844" fill="#7A5039" font-size="15" font-family="Verdana">Routinen greifen, aber die Studienbloecke brauchen mehr Tiefe.</text>
+</svg>
