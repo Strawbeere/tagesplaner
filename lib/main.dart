@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'dart:math';
+import 'dart:async';
 
 void main() {
   initializeDateFormatting('de_DE', null).then((_) {
@@ -205,6 +206,43 @@ class _TagPageState extends State<TagPage> {
   DateTime _selectedDate = DateTime.now();
   final ScrollController _scrollController = ScrollController();
 
+  // Drag & Drop State
+  int? _draggingTaskIndex;
+  int? _hoverHour;
+  int? _hoverHalf;
+  Timer? _autoScrollTimer;
+  double? _dragPointerY;
+  final GlobalKey _scrollAreaKey = GlobalKey();
+
+  void _startAutoScroll() {
+    _autoScrollTimer?.cancel();
+    _autoScrollTimer = Timer.periodic(const Duration(milliseconds: 16), (_) {
+      if (_dragPointerY == null || _draggingTaskIndex == null) return;
+      final renderBox = _scrollAreaKey.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox == null) return;
+      final viewportHeight = renderBox.size.height;
+      const edgeThreshold = 80.0;
+      const scrollSpeed = 6.0;
+      if (_dragPointerY! < edgeThreshold) {
+        final intensity = (1 - _dragPointerY! / edgeThreshold).clamp(0.0, 1.0);
+        _scrollController.jumpTo(
+          (_scrollController.offset - scrollSpeed * intensity * 2).clamp(0.0, _scrollController.position.maxScrollExtent),
+        );
+      } else if (_dragPointerY! > viewportHeight - edgeThreshold) {
+        final intensity = (1 - (viewportHeight - _dragPointerY!) / edgeThreshold).clamp(0.0, 1.0);
+        _scrollController.jumpTo(
+          (_scrollController.offset + scrollSpeed * intensity * 2).clamp(0.0, _scrollController.position.maxScrollExtent),
+        );
+      }
+    });
+  }
+
+  void _stopAutoScroll() {
+    _autoScrollTimer?.cancel();
+    _autoScrollTimer = null;
+    _dragPointerY = null;
+  }
+
   final List<Task> _tasks = [
     Task(title: 'Aufstehen', startHour: 7, endHour: 7, endMinute: 30, status: TaskStatus.erledigt),
     Task(title: 'Lernen', startHour: 8, endHour: 10, status: TaskStatus.teilweise),
@@ -234,6 +272,7 @@ class _TagPageState extends State<TagPage> {
 
   @override
   void dispose() {
+    _autoScrollTimer?.cancel();
     _scrollController.dispose();
     _noteController.dispose();
     _wellController.dispose();
@@ -626,7 +665,17 @@ class _TagPageState extends State<TagPage> {
 
             // Zeitachse + Statistik + Reflexion
             Expanded(
-              child: ListView(
+              key: _scrollAreaKey,
+              child: Listener(
+                onPointerMove: (event) {
+                  if (_draggingTaskIndex != null) {
+                    final renderBox = _scrollAreaKey.currentContext?.findRenderObject() as RenderBox?;
+                    if (renderBox != null) {
+                      _dragPointerY = renderBox.globalToLocal(event.position).dy;
+                    }
+                  }
+                },
+                child: ListView(
                 controller: _scrollController,
                 padding: const EdgeInsets.only(bottom: 100),
                 children: [
@@ -652,6 +701,7 @@ class _TagPageState extends State<TagPage> {
                     ),
                   ),
                 ],
+              ),
               ),
             ),
           ],
@@ -694,7 +744,27 @@ class _TagPageState extends State<TagPage> {
                         final endTotal = h + half * 0.5 + duration;
                         task.endHour = endTotal.floor().clamp(0, 23);
                         task.endMinute = ((endTotal - endTotal.floor()) * 60).round();
+                        _draggingTaskIndex = null;
+                        _hoverHour = null;
+                        _hoverHalf = null;
                       });
+                    },
+                    onWillAcceptWithDetails: (details) {
+                      if (_hoverHour != h || _hoverHalf != half) {
+                        setState(() {
+                          _hoverHour = h;
+                          _hoverHalf = half;
+                        });
+                      }
+                      return true;
+                    },
+                    onLeave: (_) {
+                      if (_hoverHour == h && _hoverHalf == half) {
+                        setState(() {
+                          _hoverHour = null;
+                          _hoverHalf = null;
+                        });
+                      }
                     },
                     builder: (context, candidateData, rejectedData) {
                       final isFullHour = half == 0;
@@ -720,7 +790,6 @@ class _TagPageState extends State<TagPage> {
                                     border: isFullHour
                                         ? const Border(top: BorderSide(color: Color(0xFFE2E8F0), width: 0.5))
                                         : const Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 0.5)),
-                                    color: candidateData.isNotEmpty ? AppColors.primary.withValues(alpha: 0.1) : null,
                                   ),
                                 ),
                               ),
@@ -731,6 +800,28 @@ class _TagPageState extends State<TagPage> {
                     },
                   ),
                 ),
+
+            // Drag-Vorschau: zeigt volle Aufgaben-Höhe an der Zielposition
+            if (_draggingTaskIndex != null && _hoverHour != null)
+              Positioned(
+                top: (_hoverHour! - _startHour) * _hourHeight + (_hoverHalf ?? 0) * (_hourHeight / 2),
+                left: 50,
+                right: 4,
+                height: (() {
+                  final task = _tasks[_draggingTaskIndex!];
+                  final duration = (task.endHour + task.endMinute / 60.0) - (task.startHour + task.startMinute / 60.0);
+                  return (duration * _hourHeight).clamp(30.0, double.infinity);
+                })(),
+                child: IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 1.5),
+                    ),
+                  ),
+                ),
+              ),
 
             // Aktuelle Zeit-Linie (nur heute)
             if (DateUtils.isSameDay(_selectedDate, DateTime.now()))
@@ -786,60 +877,67 @@ class _TagPageState extends State<TagPage> {
         statusIcon = Icons.radio_button_unchecked;
     }
 
-    Widget buildTaskContent({double? fixedHeight}) {
+    Widget buildTaskContent({double? fixedHeight, bool isDragFeedback = false}) {
       return SizedBox(
         height: fixedHeight,
         child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 1),
-        decoration: BoxDecoration(
-          color: task.status == TaskStatus.erledigt
-              ? AppColors.statusDone.withValues(alpha: 0.1)
-              : task.status == TaskStatus.teilweise
-                  ? AppColors.statusPartial.withValues(alpha: 0.1)
-                  : AppColors.primary.withValues(alpha: 0.06),
-          borderRadius: BorderRadius.circular(8),
-          border: Border(
-            left: BorderSide(color: task.status.color, width: 3),
+          margin: const EdgeInsets.symmetric(vertical: 1),
+          decoration: BoxDecoration(
+            color: task.status == TaskStatus.erledigt
+                ? AppColors.statusDone.withValues(alpha: 0.1)
+                : task.status == TaskStatus.teilweise
+                    ? AppColors.statusPartial.withValues(alpha: 0.1)
+                    : AppColors.primary.withValues(alpha: 0.06),
+            borderRadius: BorderRadius.circular(8),
+            border: Border(
+              left: BorderSide(color: task.status.color, width: 3),
+            ),
           ),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    task.title,
-                    style: TextStyle(
-                      fontSize: height < 40 ? 12 : 14,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                      decoration: task.status == TaskStatus.erledigt ? TextDecoration.lineThrough : null,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  if (height > 50 && task.description != null && task.description!.isNotEmpty)
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
                     Text(
-                      task.description!,
-                      style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                      task.title,
+                      style: TextStyle(
+                        fontSize: height < 40 ? 12 : 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textPrimary,
+                        decoration: task.status == TaskStatus.erledigt ? TextDecoration.lineThrough : null,
+                      ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                ],
+                    if (height > 50 && task.description != null && task.description!.isNotEmpty)
+                      Text(
+                        task.description!,
+                        style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                  ],
+                ),
               ),
-            ),
-            Text(
-              task.timeString,
-              style: TextStyle(fontSize: height < 40 ? 10 : 11, color: AppColors.textSecondary),
-            ),
-            const SizedBox(width: 6),
-            Icon(statusIcon, size: height < 40 ? 20 : 24, color: task.status.color),
-          ],
+              Text(
+                task.timeString,
+                style: TextStyle(fontSize: height < 40 ? 10 : 11, color: AppColors.textSecondary),
+              ),
+              const SizedBox(width: 4),
+              Icon(statusIcon, size: height < 40 ? 18 : 22, color: task.status.color),
+              if (!isDragFeedback) ...[
+                const SizedBox(width: 4),
+                GestureDetector(
+                  onTap: () => _editTask(task, index),
+                  child: Icon(Icons.edit_outlined, size: height < 40 ? 16 : 20, color: AppColors.textSecondary),
+                ),
+              ],
+            ],
+          ),
         ),
-      ),
       );
     }
 
@@ -848,17 +946,38 @@ class _TagPageState extends State<TagPage> {
       left: 50,
       right: 4,
       height: height,
-      child: Draggable<int>(
+      child: LongPressDraggable<int>(
         data: index,
         axis: Axis.vertical,
+        hapticFeedbackOnStart: true,
+        onDragStarted: () {
+          setState(() => _draggingTaskIndex = index);
+          _startAutoScroll();
+        },
+        onDragEnd: (_) {
+          _stopAutoScroll();
+          setState(() {
+            _draggingTaskIndex = null;
+            _hoverHour = null;
+            _hoverHalf = null;
+          });
+        },
+        onDraggableCanceled: (_, __) {
+          _stopAutoScroll();
+          setState(() {
+            _draggingTaskIndex = null;
+            _hoverHour = null;
+            _hoverHalf = null;
+          });
+        },
         feedback: Material(
           color: Colors.transparent,
           child: SizedBox(
             width: MediaQuery.of(context).size.width - 70,
-            child: Opacity(opacity: 0.8, child: buildTaskContent(fixedHeight: height)),
+            child: Opacity(opacity: 0.85, child: buildTaskContent(fixedHeight: height, isDragFeedback: true)),
           ),
         ),
-        childWhenDragging: Opacity(opacity: 0.3, child: buildTaskContent(fixedHeight: height)),
+        childWhenDragging: Opacity(opacity: 0.2, child: buildTaskContent(fixedHeight: height, isDragFeedback: true)),
         child: Dismissible(
           key: ValueKey('task_${task.title}_${task.startHour}_$index'),
           direction: DismissDirection.endToStart,
@@ -874,7 +993,6 @@ class _TagPageState extends State<TagPage> {
           ),
           child: GestureDetector(
             onTap: () => _showStatusMenu(task),
-            onLongPress: () => _editTask(task, index),
             child: buildTaskContent(fixedHeight: height),
           ),
         ),
